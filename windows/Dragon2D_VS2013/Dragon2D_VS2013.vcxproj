@@ -270,6 +270,7 @@
     <ClInclude Include="..\..\source\Classes\GameObject.h" />
     <ClInclude Include="..\..\source\Classes\Player.h" />
     <ClInclude Include="..\..\source\Classes\PlayerCharacter.h" />
+    <ClInclude Include="..\..\source\Classes\QuizManager.h" />
     <ClInclude Include="..\..\source\Classes\ResourceManager.h" />
     <ClInclude Include="..\..\source\Classes\Save.h" />
     <ClInclude Include="..\..\source\Classes\ScriptEngine.h" />
@@ -291,6 +292,7 @@
     <ClCompile Include="..\..\source\Classes\Map.cpp" />
     <ClCompile Include="..\..\source\Classes\Player.cpp" />
     <ClCompile Include="..\..\source\Classes\PlayerCharacter.cpp" />
+    <ClCompile Include="..\..\source\Classes\QuizManager.cpp" />
     <ClCompile Include="..\..\source\Classes\ResourceManager.cpp" />
     <ClCompile Include="..\..\source\Classes\Save.cpp" />
     <ClCompile Include="..\..\source\Classes\ScriptEngine.cpp" />

@@ -10,10 +10,7 @@ def Init() {}
 
 def Run() {
 	ResetCurrentTextInput();
-	NewUiObject().Load("mainmenu");
-	//LoadMainmenu(); 
-	//CurrentManager().Load("blub");
-	//LoadTilesetEditor();
+	GlobalUi("playerselect").Load("playerselect");
 	CurrentManager().RunGame(ScriptUpdate, ScriptRender);
 }
 

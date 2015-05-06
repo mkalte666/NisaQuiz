@@ -78,6 +78,9 @@
     <ClInclude Include="..\..\source\Classes\PlayerCharacter.h">
       <Filter>Headerdateien\Classes</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\source\Classes\QuizManager.h">
+      <Filter>Headerdateien\Classes</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\source\Dragon2D.cpp">
@@ -132,6 +135,9 @@
       <Filter>Quelldateien\Classes</Filter>
     </ClCompile>
     <ClCompile Include="..\..\source\Classes\PlayerCharacter.cpp">
+      <Filter>Quelldateien\Classes</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\source\Classes\QuizManager.cpp">
       <Filter>Quelldateien\Classes</Filter>
     </ClCompile>
   </ItemGroup>
