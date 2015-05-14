@@ -247,6 +247,8 @@ Env::Env(int argc, char** argv)
 	});
 	TailTipUI::Info::SetTextBufferResetCallback(Env::ResetCurrentTextInput);
 	TailTipUI::Info::SetGetTextBufferCallback(Env::GetCurrentText);
+	TailTipUI::Info::SetTextBufferSetCallback(Env::SetCurrentTextInput);
+	SDL_StartTextInput();
 	Out() << "Done!" << std::endl;
 	//yay
 }
@@ -428,6 +430,9 @@ void Env::HandleEvent(SDL_Event&e)
 		ActiveEnv->currentText += e.text.text;
 		ActiveEnv->currentKeyInputs.push_back(e.text.text);
 		break;
+	case SDL_TEXTEDITING:
+		std::cout << e.edit.text << std::endl;
+		break;
 	case SDL_KEYDOWN:
 		if (e.key.keysym.sym == SDLK_BACKSPACE) {
 			if (ActiveEnv->currentText.size() > 0) {
@@ -454,6 +459,12 @@ std::string Env::GetCurrentText()
 {
 	_CheckEnv();
 	return  ActiveEnv->currentText;
+}
+
+void Env::SetCurrentTextInput(std::string t)
+{
+	_CheckEnv();
+	ActiveEnv->currentText = t;
 }
 
 const Uint8* Env::GetCurrentKeysRaw()

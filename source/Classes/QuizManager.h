@@ -54,11 +54,16 @@ namespace Dragon2D
 			STATE_QUESTION_SETUP,
 			STATE_WRONG,
 			STATE_RIGHT,
+			STATE_SHOW_ANSWER,
 			STATE_QUESTION_CLEANUP,
 		};
 
 		enum QuizManageInput {
 			IN_NONE = 0,
+			IN_1,
+			IN_2,
+			IN_3,
+			IN_4,
 			IN_OK,
 			IN_WRONG,
 			IN_RESET,
@@ -85,6 +90,9 @@ namespace Dragon2D
 
 		std::queue<QuizQuestion> questions;
 		int currentQuestion;
+
+		int maxtries;
+		int triesLeft;
 
 	protected:
 		void SwitchUI();

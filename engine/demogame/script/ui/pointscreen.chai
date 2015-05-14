@@ -1,0 +1,22 @@
+def LoadUIpointscreen(Ui ui) {
+	var numPlayers = GlobalQuizManager("quizmanager").GetNumPlayers();
+	ui.GetLoader().GetElementById("p0n").SetName(GlobalQuizManager("quizmanager").GetPlayername(0));
+	ui.GetLoader().GetElementById("p1n").SetName(GlobalQuizManager("quizmanager").GetPlayername(1));
+	ui.GetLoader().GetElementById("p2n").SetName(GlobalQuizManager("quizmanager").GetPlayername(2));
+	ui.GetLoader().GetElementById("p3n").SetName(GlobalQuizManager("quizmanager").GetPlayername(3));
+	
+	puts(GlobalQuizManager("quizmanager").GetPlayername(0));
+	puts("\n");
+	
+	ui.GetLoader().GetElementById("p0p").SetName(to_string(GlobalQuizManager("quizmanager").GetPlayerpoints(0)));
+	if(numPlayers>=2) {
+		ui.GetLoader().GetElementById("p1p").SetName(to_string(GlobalQuizManager("quizmanager").GetPlayerpoints(1)));
+	}
+	if(numPlayers>=3) {
+		ui.GetLoader().GetElementById("p2p").SetName(to_string(GlobalQuizManager("quizmanager").GetPlayerpoints(2)));
+	}
+	if(numPlayers>=4) {
+		ui.GetLoader().GetElementById("p3p").SetName(to_string(GlobalQuizManager("quizmanager").GetPlayerpoints(3)));
+	}
+	CurrentManager().Add(ui);
+}

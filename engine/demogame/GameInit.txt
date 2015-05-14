@@ -5,3 +5,5 @@ comport = COM16
 
 #some config settings not fixed to the engine
 debug = true
+
+maxtries = 2

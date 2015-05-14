@@ -1,0 +1,13 @@
+<root>
+	<area id="playerselect" pos="0,0,1,1">
+		<image texturename="Buzzerspiel_Punkte" pos="0.0,0.0,1,1" />
+		<text id="p0n" color="1,1,1,1" font="OpenSans:64" pos="0.2,0.3,0.25,0.04" name=""/>
+		<text id="p0p" color="1,1,1,1" font="OpenSans:64" pos="0.6,0.3,0.25,0.04" name=""/>
+		<text id="p1n" color="1,1,1,1" font="OpenSans:64" pos="0.2,0.37,0.25,0.04" name=""/>
+		<text id="p1p" color="1,1,1,1" font="OpenSans:64" pos="0.6,0.37,0.25,0.04" name=""/>
+		<text id="p2n" color="1,1,1,1" font="OpenSans:64" pos="0.2,0.44,0.25,0.04" name=""/>
+		<text id="p2p" color="1,1,1,1" font="OpenSans:64" pos="0.6,0.44,0.25,0.04" name=""/>
+		<text id="p3n" color="1,1,1,1" font="OpenSans:64" pos="0.2,0.51,0.25,0.04" name=""/>
+		<text id="p3p" color="1,1,1,1" font="OpenSans:64" pos="0.6,0.51,0.25,0.04" name=""/>
+	</area>
+</root>

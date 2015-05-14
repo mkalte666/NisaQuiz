@@ -28,6 +28,8 @@ namespace Dragon2D
 			buzzerManager.reset(new NisaBuzzer::BuzzerManager(port));
 			buzzerManager->FullReset();
 		}
+		std::string gameinit = Env::GetGamepath() + "GameInit.txt";
+		maxtries = atoi(Env::Setting(gameinit)["maxtries"].c_str());
 		//Load the questions
 		XMLResource& questionResource = Env::GetResourceManager().GetXMLResource(std::string("quiz/") + gamename + ".xml");
 		auto doc = questionResource.GetDocument();
@@ -93,6 +95,7 @@ namespace Dragon2D
 		case Dragon2D::QuizManager::STATE_SETUP:
 			break;
 		case Dragon2D::QuizManager::STATE_QUESTION_CLEANUP:
+			buzzerManager->FullReset();
 			curstate = STATE_POINT_DISPLAY;
 			if (!questions.empty()) {
 				questions.pop();
@@ -103,7 +106,7 @@ namespace Dragon2D
 				if (questions.front().audioName != "") {
 					Music(questions.front().audioName).Play(100, -1);
 				}
-
+				triesLeft = maxtries;
 				curstate = STATE_QUESTION;
 				SwitchUI();
 				buzzerManager->Arm();
@@ -128,23 +131,65 @@ namespace Dragon2D
 				}
 			}
 			break;
-		case Dragon2D::QuizManager::STATE_QUESTION_CHECKANSWER:
-			if (lastInput == IN_OK) {
-				curstate = STATE_RIGHT;
-				break;
+		case Dragon2D::QuizManager::STATE_QUESTION_CHECKANSWER:			
+			if (questions.front().type == QuizQuestion::QUESTION_MULTIPLE_CHOICE) {
+				if (lastInput >= IN_1 && lastInput <= IN_4) {
+					int id = lastInput - IN_1;
+					if (id == questions.front().rightAnswer) {
+						curstate = STATE_RIGHT;
+						
+					}
+					else {
+						curstate = STATE_WRONG;
+						questions.front().answers[id] = "";
+					}
+				}
 			}
-			if (lastInput == IN_WRONG) {
-				curstate = STATE_WRONG;
-				break;
+			else {
+				if (lastInput == IN_OK) {
+					curstate = STATE_RIGHT;
+					break;
+				}
+				else if (lastInput == IN_WRONG) {
+					curstate = STATE_WRONG;
+					break;
+				}
 			}
 			break;
 		case Dragon2D::QuizManager::STATE_WRONG:
 			points[lastBuzzerinputParam-1] -= questions.front().points;
-			curstate = STATE_QUESTION_CLEANUP;
+			triesLeft --;
+
+			if (triesLeft > 0) {
+				curstate = STATE_QUESTION;
+				SwitchUI();
+				buzzerManager->Reset();
+				buzzerManager->Arm();
+			}
+			else {
+				if (questions.front().type == QuizQuestion::QUESTION_MULTIPLE_CHOICE) {
+					curstate = STATE_SHOW_ANSWER;
+					SwitchUI();
+				}
+				else {
+					curstate = STATE_QUESTION_CLEANUP;
+				}
+			}
 			break;
 		case Dragon2D::QuizManager::STATE_RIGHT:
 			points[lastBuzzerinputParam-1] += questions.front().points;
-			curstate = STATE_QUESTION_CLEANUP;
+			if (questions.front().type == QuizQuestion::QUESTION_MULTIPLE_CHOICE) {
+				curstate = STATE_SHOW_ANSWER;
+				SwitchUI();
+			}
+			else {
+				curstate = STATE_QUESTION_CLEANUP;
+			}
+			break;
+		case Dragon2D::QuizManager::STATE_SHOW_ANSWER:
+			if (lastInput == IN_START) {
+				curstate = STATE_QUESTION_CLEANUP;
+			}
 			break;
 		default:
 			break;
@@ -176,6 +221,10 @@ namespace Dragon2D
 	
 	void QuizManager::RegisterInputHooks()
 	{
+		InputEventFunction event1 = [this](bool pressed) { if (pressed) this->lastInput = QuizManageInput::IN_1; };
+		InputEventFunction event2 = [this](bool pressed) { if (pressed) this->lastInput = QuizManageInput::IN_2; };
+		InputEventFunction event3 = [this](bool pressed) { if (pressed) this->lastInput = QuizManageInput::IN_3; };
+		InputEventFunction event4 = [this](bool pressed) { if (pressed) this->lastInput = QuizManageInput::IN_4; };
 		InputEventFunction okevent = [this](bool pressed) { if (pressed) this->lastInput = QuizManageInput::IN_OK; };
 		InputEventFunction wrongevent = [this](bool pressed) { if (pressed) this->lastInput = QuizManageInput::IN_WRONG; };
 		InputEventFunction resetevent = [this](bool pressed) { if (pressed) this->lastInput = QuizManageInput::IN_RESET; };
@@ -188,6 +237,10 @@ namespace Dragon2D
 		Env::GetInput().AddHook("wrong", Ptr(), wrongevent);
 		Env::GetInput().AddHook("reset", Ptr(), resetevent);
 		Env::GetInput().AddHook("start", Ptr(), startevent);
+		Env::GetInput().AddHook("1", Ptr(), event1);
+		Env::GetInput().AddHook("2", Ptr(), event2);
+		Env::GetInput().AddHook("3", Ptr(), event3);
+		Env::GetInput().AddHook("4", Ptr(), event4);
 		buzzerManager->AddEventHandler(buzzerEventHandler);
 	}
 
@@ -208,22 +261,24 @@ namespace Dragon2D
 		auto questionbase = curui->GetLoader().GetElementById("questionbase");
 		auto checkquestionbase = curui->GetLoader().GetElementById("checkquestionbase");
 		if (pointscreen&&questionbase&&checkquestionbase) {
-			pointscreen->SetHidden(true);
+			pointscreen->SetHidden(false);
 			questionbase->SetHidden(true);
 			checkquestionbase->SetHidden(true);
+
+			pointscreen->GetElementById("p0n")->SetName(names[0]);
+			pointscreen->GetElementById("p1n")->SetName(names[1]);
+			pointscreen->GetElementById("p2n")->SetName(names[2]);
+			pointscreen->GetElementById("p3n")->SetName(names[3]);
+			pointscreen->GetElementById("p0p")->SetName(std::to_string(points[0]));
+			numPlayers >= 2 ? pointscreen->GetElementById("p1p")->SetName(std::to_string(points[1])) : pointscreen->GetElementById("p1p")->SetName("");
+			numPlayers >= 3 ? pointscreen->GetElementById("p2p")->SetName(std::to_string(points[2])) : pointscreen->GetElementById("p2p")->SetName("");
+			numPlayers >= 4 ? pointscreen->GetElementById("p3p")->SetName(std::to_string(points[3])) : pointscreen->GetElementById("p3p")->SetName("");
+
 
 			switch (curstate)
 			{
 			case STATE_POINT_DISPLAY:
-				pointscreen->GetElementById("p0n")->SetName(names[0]);
-				pointscreen->GetElementById("p1n")->SetName(names[1]);
-				pointscreen->GetElementById("p2n")->SetName(names[2]);
-				pointscreen->GetElementById("p3n")->SetName(names[3]);
-				pointscreen->GetElementById("p0p")->SetName(std::to_string(points[0]));
-				numPlayers >= 2 ? pointscreen->GetElementById("p1p")->SetName(std::to_string(points[1])) : pointscreen->GetElementById("p1p")->SetName("");
-				numPlayers >= 3 ? pointscreen->GetElementById("p2p")->SetName(std::to_string(points[2])) : pointscreen->GetElementById("p2p")->SetName("");
-				numPlayers >= 4 ? pointscreen->GetElementById("p3p")->SetName(std::to_string(points[3])) : pointscreen->GetElementById("p3p")->SetName("");
-				pointscreen->SetHidden(false);
+				
 				break;
 			case STATE_QUESTION:
 				questionbase->GetElementById("questionText")->SetName(questions.front().text);
@@ -242,6 +297,20 @@ namespace Dragon2D
 			case STATE_QUESTION_CHECKANSWER:
 				checkquestionbase->GetElementById("buzzerPlayer")->SetName(names[lastBuzzerinputParam - 1]);
 				checkquestionbase->SetHidden(false);
+				break;
+			case STATE_SHOW_ANSWER:
+				questionbase->GetElementById("questionText")->SetName(questions.front().text);
+				if (questions.front().type == QuizQuestion::QUESTION_MULTIPLE_CHOICE) {
+					questionbase->GetElementById("choiceContainer")->SetHidden(false);
+					questions.front().rightAnswer == 0 ? questionbase->GetElementById("answer0")->SetName(questions.front().answers[0]) : questionbase->GetElementById("answer0")->SetName("");
+					questions.front().rightAnswer == 1 ? questionbase->GetElementById("answer1")->SetName(questions.front().answers[1]) : questionbase->GetElementById("answer1")->SetName("");
+					questions.front().rightAnswer == 2 ? questionbase->GetElementById("answer2")->SetName(questions.front().answers[2]) : questionbase->GetElementById("answer2")->SetName("");
+					questions.front().rightAnswer == 3 ? questionbase->GetElementById("answer3")->SetName(questions.front().answers[3]) : questionbase->GetElementById("answer3")->SetName("");
+				}
+				else {
+					questionbase->GetElementById("choiceContainer")->SetHidden(true);
+				}
+				questionbase->SetHidden(false);
 				break;
 			default:
 				break;

@@ -1,0 +1,5 @@
+<root>
+	<image texturename="Buzzerspiel_Anfang" pos="0.0,0.0,1,1" />
+	<area centered="true" id="i0" color="1,1,1,1" bgcolor="1,1,1,1" pos="0.5,0.6,0.8,0.04" />
+	<text centered="true" id="questionText" color="0,0,0,0" font="OpenSans:64" pos="0.5,0.6,0.8,0.04" name="Question Here!" />
+</root>

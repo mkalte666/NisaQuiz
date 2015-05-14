@@ -1,0 +1,3 @@
+ def LoadUItextquestion(Ui ui) {
+	CurrentManager().Add(ui);
+}

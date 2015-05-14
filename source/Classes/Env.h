@@ -109,6 +109,9 @@ public:
 	//note: Activates text inpuit. carefull with that!
 	static void ResetCurrentTextInput();
 
+	//function: SetCurrentTextInput
+	//note: overwriters the current text buffer
+	static void SetCurrentTextInput(std::string t);
 
 	//function:GetCurrentKeys
 	//note: Returns the pressed key, but not as keycodes but as unicode characters!
