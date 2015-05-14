@@ -387,60 +387,11 @@ namespace Dragon2D {
 		_CheckEnv();
 		return *(ActiveEnv->input);
 	}
-<<<<<<< HEAD
-	
-	//in the end fire up the resource manager
-	resourceManager.reset(new ResourceManager);
-
-	//fire up input
-	input.reset(new Input);
-
-	Out() << "Give information to TailTipUI" << std::endl;
-	TailTipUI::Info(settings[gameInitName]["title"], width, height);
-	TailTipUI::Info::SetMouseCallback(Env::GetCurrentMouseState);
-	TailTipUI::Info::SetButtonCallback(Env::GetCurrentKeysRaw);
-	TailTipUI::Info::SetImageCallback([this](std::string name) { 
-		return resourceManager->GetTextureResource(name).GetTextureId(); 
-	});
-	TailTipUI::Info::SetFontCallback([this](std::string name, int size) {
-		return resourceManager->GetFontResource(name).GetFont(size);
-	});
-	TailTipUI::Info::SetTextBufferResetCallback(Env::ResetCurrentTextInput);
-	TailTipUI::Info::SetGetTextBufferCallback(Env::GetCurrentText);
-	TailTipUI::Info::SetTextBufferSetCallback(Env::SetCurrentTextInput);
-	SDL_StartTextInput();
-	Out() << "Done!" << std::endl;
-	//yay
-}
-
-Env::~Env()
-{
-	input.reset();
-	resourceManager.reset();
-	Mix_Quit();
-	SDL_GL_DeleteContext(context);
-	SDL_DestroyWindow(window);
-	SDL_Quit();
-	ActiveEnv = nullptr;
-}
-
-Env& Env::GetActiveEnv()
-{
-	_CheckEnv();
-	return *ActiveEnv;
-}
-
-void Env::_CheckEnv()
-{
-	if (ActiveEnv == nullptr) {
-		throw EnvException("Tried to call Env function without initialise the Env!");
-=======
 
 	void Env::Enginefile(std::string file, std::ios_base::openmode mode, std::fstream &stream)
 	{
 		_CheckEnv();
 		return stream.open(file, mode);
->>>>>>> master
 	}
 
 	SettingFile& Env::Setting(std::string file)
@@ -467,39 +418,6 @@ void Env::_CheckEnv()
 		//dont check env since the streams are static
 		return streamOutError;
 	}
-<<<<<<< HEAD
-}
-
-std::ostream& Env::Out()
-{
-	//dont check env since the streams are static
-	return streamOut;
-}
-
-std::ostream& Env::Err()
-{
-	//dont check env since the streams are static
-	return streamOutError;
-}
-
-void Env::HandleEvent(SDL_Event&e)
-{
-	_CheckEnv();
-	ActiveEnv->currentKeyInputs.clear();
-	ActiveEnv->input->Update(e);
-	switch (e.type) {
-	case SDL_TEXTINPUT:
-		ActiveEnv->currentText += e.text.text;
-		ActiveEnv->currentKeyInputs.push_back(e.text.text);
-		break;
-	case SDL_TEXTEDITING:
-		std::cout << e.edit.text << std::endl;
-		break;
-	case SDL_KEYDOWN:
-		if (e.key.keysym.sym == SDLK_BACKSPACE) {
-			if (ActiveEnv->currentText.size() > 0) {
-				ActiveEnv->currentText.pop_back();
-=======
 
 	void Env::HandleEvent(SDL_Event&e)
 	{
@@ -519,72 +437,15 @@ void Env::HandleEvent(SDL_Event&e)
 				if (ActiveEnv->currentText.size() > 0) {
 					ActiveEnv->currentText.pop_back();
 				}
->>>>>>> master
 			}
 			break;
 		}
 	}
-<<<<<<< HEAD
-}
-
-std::list<std::string> Env::GetCurrentKeys()
-{
-	_CheckEnv();
-	return ActiveEnv->currentKeyInputs;
-}
-
-void Env::ResetCurrentTextInput()
-{
-	_CheckEnv();
-	ActiveEnv->currentText = "";
-}
-
-std::string Env::GetCurrentText()
-{
-	_CheckEnv();
-	return  ActiveEnv->currentText;
-}
-
-void Env::SetCurrentTextInput(std::string t)
-{
-	_CheckEnv();
-	ActiveEnv->currentText = t;
-}
-
-const Uint8* Env::GetCurrentKeysRaw()
-{
-	_CheckEnv();
-	SDL_PumpEvents();
-	return SDL_GetKeyboardState(NULL);
-}
-
-
-
-//Setting stuff
-
-SettingFile::SettingFile()
-{
-	//nothing to do here
-}
-
-SettingFile::SettingFile(std::string settingFile)
-{
-	inFile = settingFile;
-	_Load();
-}
-
-void SettingFile::_Load()
-{
-	std::fstream infile(inFile.c_str(),std::ios::in);
-	if (!infile.is_open()) {
-		throw EnvException("Cannot open a settings file!");
-=======
 
 	std::list<std::string> Env::GetCurrentKeys()
 	{
 		_CheckEnv();
 		return ActiveEnv->currentKeyInputs;
->>>>>>> master
 	}
 
 	void Env::ResetCurrentTextInput()
