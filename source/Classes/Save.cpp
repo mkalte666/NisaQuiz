@@ -98,9 +98,9 @@ namespace Dragon2D
 		pos += namesize;
 		//read in all fields
 		for (int i = 0; i < fieldCount; i++) {
-			unsigned int fieldId = *(unsigned int*)pos._Ptr;
+			unsigned int fieldId = *(unsigned int*)&(*pos);
 			pos += sizeof(unsigned int);
-			unsigned int fieldSize = *(unsigned int*)pos._Ptr;
+			unsigned int fieldSize = *(unsigned int*)&(*pos);
 			pos += sizeof(unsigned int);
 			std::vector<unsigned char> fieldData(pos, pos + fieldSize);
 			datafields[fieldId] = fieldData;
@@ -108,7 +108,7 @@ namespace Dragon2D
 		}
 		//The rest is children
 		while (pos < in.end()) {
-			unsigned int childSize = *(unsigned int*)pos._Ptr;
+			unsigned int childSize = *(unsigned int*)&(*pos);
 			std::vector<unsigned char> childData(pos, pos + childSize);
 			SaveStatePtr child(new SaveState);
 			child->DeSerialize(childData);

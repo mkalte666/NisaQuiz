@@ -18,7 +18,7 @@ namespace Dragon2D
 	QuizManager::~QuizManager()
 	{
 		//Free the resources
-		Env::GetResourceManager().FreeAudioResource("Buzz");
+	//	Env::GetResourceManager().FreeAudioResource("Buzz");
 	}
 	void QuizManager::Load(std::string gamename, std::string player1, std::string player2, std::string player3, std::string player4)
 	{

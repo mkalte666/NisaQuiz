@@ -216,20 +216,20 @@ public:
 	//param: 	toParse: data to parse
 	std::string Load(std::string toParse)
 	{
-		unsigned int pos = toParse.npos;
+		std::size_t pos = toParse.npos;
 		while((pos=toParse.find("<"))!=toParse.npos) {
 			data += toParse.substr(0,pos);
-			unsigned int endpos = toParse.find(">", pos);
+			std::size_t endpos = toParse.find(">", pos);
 			std::string tagstring = toParse.substr(pos,endpos-pos+1);
 			toParse = toParse.substr(endpos+1, toParse.size()-endpos);
 			//create the new Tag
-			unsigned int newTagPos = 0;
+			std::size_t newTagPos = 0;
 			if((newTagPos=tagstring.find_first_not_of("<> \n\t"))!=tagstring.npos) {
 				//is a end-tag?
 				if(tagstring[newTagPos]=='/' ) {
 					//get the name of this end-tag. in theory it should be the name of this tag, but who knows
-					unsigned int endTagNamePos = tagstring.find_first_not_of("<> \n\t/", newTagPos); 
-					unsigned int endTagNameEnd = tagstring.find_first_of("<> \n\t", endTagNamePos);
+					std::size_t endTagNamePos = tagstring.find_first_not_of("<> \n\t/", newTagPos); 
+					std::size_t endTagNameEnd = tagstring.find_first_of("<> \n\t", endTagNamePos);
 					std::string endTagName = tagstring.substr(endTagNamePos,endTagNameEnd-endTagNamePos);
 					//if its us, were done here. 
 					if(endTagName==name) {
@@ -238,18 +238,18 @@ public:
 						data+=tagstring;
 					}
 				} else { //no, its a normal tag. parse it, add it as child and let it continue the parsing
-					unsigned int tagNamePos = tagstring.find_first_not_of("<> \n\t/", newTagPos); 
-					unsigned int tagNameEnd = tagstring.find_first_of("<> \n\t", tagNamePos);
+					std::size_t tagNamePos = tagstring.find_first_not_of("<> \n\t/", newTagPos); 
+					std::size_t tagNameEnd = tagstring.find_first_of("<> \n\t", tagNamePos);
 					std::string tagName = tagstring.substr(tagNamePos,tagNameEnd-tagNamePos);
 					Tag child(tagName);
 					//we have the name, we need the attributes: foo="bar". find the equal, go left, then right, then cut the string to parse.
 					std::string attributeString = tagstring.substr(tagNameEnd+1, tagstring.size()-tagNameEnd);
-					unsigned int equalPos = attributeString.npos;
+					std::size_t equalPos = attributeString.npos;
 					while((equalPos=attributeString.find("="))!=attributeString.npos) {
 						std::string l = attributeString.substr(0,equalPos);
 						l.erase (std::remove (l.begin(), l.end(), ' '), l.end());
-						unsigned int rBegin = attributeString.find_first_of("\"'",equalPos+1);
-						unsigned int rEnd = attributeString.find_first_of("\"'",rBegin+1);
+						std::size_t rBegin = attributeString.find_first_of("\"'",equalPos+1);
+						std::size_t rEnd = attributeString.find_first_of("\"'",rBegin+1);
 						std::string r = attributeString.substr(rBegin+1,rEnd-rBegin-1);
 						child.SetAttribute(l,r);
 						attributeString = attributeString.substr(rEnd+1,attributeString.size()-rEnd);

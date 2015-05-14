@@ -496,7 +496,7 @@ namespace Dragon2D {
 		}
 		std::string infileString((std::istreambuf_iterator<char>(infile)), std::istreambuf_iterator<char>());
 
-		std::regex e("\\s*(\\w*[\\w\\d]*)\\s*=\\s*([\\w\\d ]*)\\s*\n*");
+		std::regex e("\\s*(\\w*[\\w\\d]*)\\s*=\\s*([\\w\\d\\/\\\\\\. ]*)\\s*\n*");
 		std::smatch m;
 		std::string s(infileString);
 		while (std::regex_search(s, m, e)) {

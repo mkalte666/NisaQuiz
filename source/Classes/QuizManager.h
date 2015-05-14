@@ -1,7 +1,7 @@
 #pragma once
 
 #include "BaseClass.h"
-#include <NisaBuzzer\include\NisaBuzzer.hpp>
+#include "NisaBuzzer/include/NisaBuzzer.hpp"
 #include "Ui.h"
 
 namespace Dragon2D

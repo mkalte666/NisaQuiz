@@ -7,6 +7,7 @@
 //if you want to use another version of the asio lib or just use the one distributed with your system, define NISABUZZER_DIFFERENT_ASIO_LOCATION
 //example: #define NISABUZZER_DIFFERENT_ASIO_LOCATION <asio/asio.hpp>
 #define ASIO_STANDALONE
+#define ASIO_HAS_STD_CHRONO
 #ifdef NISABUZZER_DIFFERENT_ASIO_LOCATION
 #include NISABUZZER_DIFFERENT_ASIO_LOCATION
 #else

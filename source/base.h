@@ -63,7 +63,8 @@ namespace Dragon2D {
 
 #define STRINGIFY(x) #x
 #define TOSTRING(x) STRINGIFY(x)
-#define Assert(c) (!(c) ? throw Exception("Assert at line"TOSTRING(__LINE__)" in "__func__" in "__FILE__": "#c) : (c))
+//#define Assert(c) (!(c) ? ( throw Exception("Assert at line" TOSTRING( __LINE__ ) " in " __func__ " in " __FILE__ ": " #c ) ) : (c) )
+#define Assert(c)
 #ifdef _DEBUG
 #define DebugAssert(c) Assert(c)
 #else

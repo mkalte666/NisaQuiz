@@ -13,6 +13,9 @@ def RunQuiz(UIElement e, XMLUI loader) {
 	CurrentManager().Remove(GlobalUi("playerselect"));
 	GlobalQuizManager("quizmanager").Load(gamename, i0,i1,i2,i3);
 	CurrentManager().Add(GlobalQuizManager("quizmanager"));
+	//var quizmanager = NewQuizManagerObject();
+	//quizmanager.Load(gamename, i0,i1,i2,i3);
+	//CurrentManager().Add(quizmanager);
 }
 
 def LoadUIplayerselect(Ui ui) {

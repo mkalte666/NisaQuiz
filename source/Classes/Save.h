@@ -60,17 +60,7 @@ namespace Dragon2D
 			memcpy(indata.data(), &data, sizeof(T));
 			datafields[field] = indata;
 		}
-		//Specification for boolean
-		template<>
-		void SetData<bool>(int field, bool data) {
-			SetData<char>(field, data);
-		}
-		//specification for strings
-		template<>
-		void SetData<std::string>(int field, std::string data) {
-			std::vector<unsigned char> indata(data.begin(), data.end());
-			datafields[field] = indata;
-		}
+		
 
 		//function: GetData
 		//note: Returns a datafield, data casted to type T
@@ -82,19 +72,7 @@ namespace Dragon2D
 			T outdata = *((T*)datafields[field].data());
 			return outdata;
 		}
-		//specification for boolean
-		template<>
-		bool GetData<bool>(int field)
-		{
-			return datafields[field][0] != 0;
-		}
-		//specification for strings
-		template<>
-		std::string GetData<std::string>(int field)
-		{
-			std::string s(datafields[field].begin(), datafields[field].end());
-			return s;
-		}
+		
 
 	private:
 		//var: name. name of the saveState
@@ -109,4 +87,30 @@ namespace Dragon2D
 	//note: Creates a new SaveState-object if the given SaveStatePtr is empty
 	//param:	SaveStatePtr: ref to the SaveStatePtr that will be created
 	void CreateSaveStateIfEmpty(SaveStatePtr&in, std::string name);
+
+	//Specification for boolean
+	template<>
+	inline void SaveState::SetData<bool>(int field, bool data) {
+		SetData<char>(field, data);
+	}
+	//specification for strings
+	template<>
+	inline void SaveState::SetData<std::string>(int field, std::string data) {
+		std::vector<unsigned char> indata(data.begin(), data.end());
+		datafields[field] = indata;
+	}
+
+	//specification for boolean
+	template<>
+	inline bool SaveState::GetData<bool>(int field)
+	{
+		return datafields[field][0] != 0;
+	}
+	//specification for strings
+	template<>
+	inline std::string SaveState::GetData<std::string>(int field)
+	{
+		std::string s(datafields[field].begin(), datafields[field].end());
+		return s;
+	}
 }; //namespace Dragon2D
