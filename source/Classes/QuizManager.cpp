@@ -102,14 +102,19 @@ namespace Dragon2D
 			}
 			SwitchUI(); 
 		case Dragon2D::QuizManager::STATE_POINT_DISPLAY:
-			if (lastInput == QuizManageInput::IN_START) {
-				if (questions.front().audioName != "") {
-					Music(questions.front().audioName).Play(100, -1);
+			if (lastInput == QuizManageInput::IN_START) {	
+				if(questions.size()>0) {
+					triesLeft = maxtries;
+					curstate = STATE_QUESTION;
+					SwitchUI();
+					buzzerManager->Arm();
+					if (questions.front().audioName != "") {
+						Music(questions.front().audioName).Play(100, -1);
+					}
+				} else {
+					curstate = STATE_SHOW_WINNER;
+					SwitchUI();
 				}
-				triesLeft = maxtries;
-				curstate = STATE_QUESTION;
-				SwitchUI();
-				buzzerManager->Arm();
 			}
 			break;
 		case Dragon2D::QuizManager::STATE_QUESTION:
@@ -190,6 +195,14 @@ namespace Dragon2D
 			if (lastInput == IN_START) {
 				curstate = STATE_QUESTION_CLEANUP;
 			}
+			break;
+		case Dragon2D::QuizManager::STATE_SHOW_WINNER:
+			if(lastInput == IN_START) {
+				//GameManager::CurrentManager().Remove(Ptr());
+				//GameManager::CurrentManager().Remove(curui);
+				//NewD2DObject<Ui>()->Load("playerselect");
+			}
+
 			break;
 		default:
 			break;
@@ -280,6 +293,9 @@ namespace Dragon2D
 			case STATE_POINT_DISPLAY:
 				
 				break;
+			case STATE_QUESTION_CHECKANSWER:
+				checkquestionbase->GetElementById("buzzerPlayer")->SetName(names[lastBuzzerinputParam - 1]);
+				checkquestionbase->SetHidden(false);
 			case STATE_QUESTION:
 				questionbase->GetElementById("questionText")->SetName(questions.front().text);
 				if (questions.front().type == QuizQuestion::QUESTION_MULTIPLE_CHOICE) {
@@ -294,10 +310,7 @@ namespace Dragon2D
 				}
 				questionbase->SetHidden(false);
 				break;
-			case STATE_QUESTION_CHECKANSWER:
-				checkquestionbase->GetElementById("buzzerPlayer")->SetName(names[lastBuzzerinputParam - 1]);
-				checkquestionbase->SetHidden(false);
-				break;
+		
 			case STATE_SHOW_ANSWER:
 				questionbase->GetElementById("questionText")->SetName(questions.front().text);
 				if (questions.front().type == QuizQuestion::QUESTION_MULTIPLE_CHOICE) {

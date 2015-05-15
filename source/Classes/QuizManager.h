@@ -56,6 +56,7 @@ namespace Dragon2D
 			STATE_RIGHT,
 			STATE_SHOW_ANSWER,
 			STATE_QUESTION_CLEANUP,
+			STATE_SHOW_WINNER,
 		};
 
 		enum QuizManageInput {
