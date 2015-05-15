@@ -1,16 +1,16 @@
-def Switch(UIElement e, XMLUI loader) {
+def Switch(Ui ui, UIElement e, XMLUI loader) {
 	loader.GetElementById("gameselect").SetHidden(true);
 	loader.GetElementById("playerselect").SetHidden(false);
 	
 }
 
-def RunQuiz(UIElement e, XMLUI loader) {
+def RunQuiz(Ui ui, UIElement e, XMLUI loader) {
 	var i0 = loader.GetElementById("i0").GetName();
 	var i1 = loader.GetElementById("i1").GetName();
 	var i2 = loader.GetElementById("i2").GetName();
 	var i3 = loader.GetElementById("i3").GetName();
 	var gamename = loader.GetElementById("gamename").GetName();
-	CurrentManager().Remove(playerselect);
+	CurrentManager().Remove(ui);
 	var quizmanager = NewQuizManagerObject();
 	quizmanager.Load(gamename, i0,i1,i2,i3);
 	CurrentManager().Add(quizmanager);
@@ -19,6 +19,5 @@ def RunQuiz(UIElement e, XMLUI loader) {
 def LoadUIplayerselect(Ui ui) {
 	ui.AddCallback("Run", RunQuiz);
 	ui.AddCallback("Switch", Switch);
-	GLOBAL playerselect = ui;
 	CurrentManager().Add(ui);
 }

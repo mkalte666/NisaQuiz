@@ -10,7 +10,7 @@ namespace Dragon2D
 	std::shared_ptr<NisaBuzzer::BuzzerManager> QuizManager::buzzerManager = std::shared_ptr<NisaBuzzer::BuzzerManager>();
 
 	QuizManager::QuizManager()
-		: numPlayers(0), curstate(QuizState::STATE_SETUP), lastInput(QuizManageInput::IN_NONE), lastBuzzerinput(NisaBuzzer::BuzzerManager::Event::NUM_EVENTS), triggerdButton(-1), currentQuestion(-1)
+		: name(""), numPlayers(0), curstate(QuizState::STATE_SETUP), lastInput(QuizManageInput::IN_NONE), lastBuzzerinput(NisaBuzzer::BuzzerManager::Event::NUM_EVENTS), triggerdButton(-1), currentQuestion(-1)
 	{
 
 	}
@@ -22,12 +22,15 @@ namespace Dragon2D
 	}
 	void QuizManager::Load(std::string gamename, std::string player1, std::string player2, std::string player3, std::string player4)
 	{
+		name = gamename;
+		//buzzer manager is static and will only be created once 
 		if (!buzzerManager) {
 			std::string gameinit = Env::GetGamepath() + "GameInit.txt";
 			std::string port = Env::Setting(gameinit)["comport"];
 			buzzerManager.reset(new NisaBuzzer::BuzzerManager(port));
 			buzzerManager->FullReset();
 		}
+
 		std::string gameinit = Env::GetGamepath() + "GameInit.txt";
 		maxtries = atoi(Env::Setting(gameinit)["maxtries"].c_str());
 		//Load the questions
@@ -68,6 +71,7 @@ namespace Dragon2D
 		//Ask for the music
 		Env::GetResourceManager().RequestAudioResource("Buzz");
 
+		//find out the number of players
 		numPlayers = 0;
 		if (player1 != "") (numPlayers = 1);
 		if (player2 != "") (numPlayers = 2);
@@ -96,6 +100,9 @@ namespace Dragon2D
 			break;
 		case Dragon2D::QuizManager::STATE_QUESTION_CLEANUP:
 			buzzerManager->FullReset();
+			if (questions.front().audioName != "") {
+				Music(questions.front().audioName).Stop(100);
+			}
 			curstate = STATE_POINT_DISPLAY;
 			if (!questions.empty()) {
 				questions.pop();
@@ -123,7 +130,7 @@ namespace Dragon2D
 				break;
 			}
 			if (lastInput == IN_RESET) {
-
+				curstate = STATE_QUESTION_CLEANUP;
 			}
 			else if (lastBuzzerinput == NisaBuzzer::BuzzerManager::Event::EVENT_TRIGGER) {
 				if (lastBuzzerinputParam <= numPlayers) {
@@ -137,7 +144,10 @@ namespace Dragon2D
 			}
 			break;
 		case Dragon2D::QuizManager::STATE_QUESTION_CHECKANSWER:			
-			if (questions.front().type == QuizQuestion::QUESTION_MULTIPLE_CHOICE) {
+			if (lastInput == IN_RESET) {
+				curstate = STATE_QUESTION_CLEANUP;
+			}
+			else if (questions.front().type == QuizQuestion::QUESTION_MULTIPLE_CHOICE) {
 				if (lastInput >= IN_1 && lastInput <= IN_4) {
 					int id = lastInput - IN_1;
 					if (id == questions.front().rightAnswer) {
@@ -273,11 +283,13 @@ namespace Dragon2D
 		auto pointscreen = curui->GetLoader().GetElementById("pointscreen");
 		auto questionbase = curui->GetLoader().GetElementById("questionbase");
 		auto checkquestionbase = curui->GetLoader().GetElementById("checkquestionbase");
-		if (pointscreen&&questionbase&&checkquestionbase) {
+		auto winnerscreen = curui->GetLoader().GetElementById("winnerscreen");
+		if (pointscreen&&questionbase&&checkquestionbase&&winnerscreen) {
 			pointscreen->SetHidden(false);
 			questionbase->SetHidden(true);
 			checkquestionbase->SetHidden(true);
-
+			winnerscreen->SetHidden(true);
+			pointscreen->GetElementById("round")->SetName(std::string("Round: "+name));
 			pointscreen->GetElementById("p0n")->SetName(names[0]);
 			pointscreen->GetElementById("p1n")->SetName(names[1]);
 			pointscreen->GetElementById("p2n")->SetName(names[2]);
@@ -325,6 +337,36 @@ namespace Dragon2D
 				}
 				questionbase->SetHidden(false);
 				break;
+			case STATE_SHOW_WINNER:
+			{
+				std::vector<std::pair<int, std::string>> order;
+				for (int i = 0; i < numPlayers; i++) {
+					if (order.size() == 0) {
+						order.push_back(std::make_pair(points[i], names[i]));
+					}
+					else {
+						bool in = false;
+						for (auto j = order.begin(); j != order.end(); j++) {
+							if (j->first <= points[i]) {
+								order.insert(j, std::make_pair(points[i], names[i]));
+								in = true;
+								break;
+							}
+						}
+						if (!in) {
+							order.push_back(std::make_pair(points[i], names[i]));
+						}
+					}
+				}
+				winnerscreen->GetElementById("winnername")->SetName(order.front().second+std::string(" (")+ std::to_string(order.front().first)+")");
+				for (int i = 1; i < numPlayers; i++) {
+					winnerscreen->GetElementById(std::string("place")+std::to_string(i+1))->SetName(std::to_string(i+1)+std::string(". ")+order[i].second + std::string(" (") + std::to_string(order[i].first) + ")");
+				}
+				winnerscreen->SetHidden(false);
+				pointscreen->SetHidden(true);
+
+				break;
+			}
 			default:
 				break;
 			}

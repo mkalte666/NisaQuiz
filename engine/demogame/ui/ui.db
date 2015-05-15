@@ -1,6 +1,8 @@
 mainmenu.xml
 playerselect.xml
 pointscreen.xml
+quizui.xml
 testui.xml
+textquestion.xml
 tileEditor.xml
 ui.db

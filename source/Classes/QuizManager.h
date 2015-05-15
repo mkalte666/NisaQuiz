@@ -73,6 +73,8 @@ namespace Dragon2D
 
 
 	private:
+		std::string name;
+
 		static std::shared_ptr<NisaBuzzer::BuzzerManager> buzzerManager;
 
 		int numPlayers;
