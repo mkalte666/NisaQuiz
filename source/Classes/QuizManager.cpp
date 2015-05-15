@@ -198,9 +198,9 @@ namespace Dragon2D
 			break;
 		case Dragon2D::QuizManager::STATE_SHOW_WINNER:
 			if(lastInput == IN_START) {
-				//GameManager::CurrentManager().Remove(Ptr());
-				//GameManager::CurrentManager().Remove(curui);
-				//NewD2DObject<Ui>()->Load("playerselect");
+				GameManager::CurrentManager().Remove(Ptr());
+				GameManager::CurrentManager().Remove(curui);
+				NewD2DObject<Ui>()->Load("playerselect");
 			}
 
 			break;

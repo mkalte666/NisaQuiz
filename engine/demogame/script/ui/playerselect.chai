@@ -11,15 +11,14 @@ def RunQuiz(UIElement e, XMLUI loader) {
 	var i3 = loader.GetElementById("i3").GetName();
 	var gamename = loader.GetElementById("gamename").GetName();
 	CurrentManager().Remove(GlobalUi("playerselect"));
-	GlobalQuizManager("quizmanager").Load(gamename, i0,i1,i2,i3);
-	CurrentManager().Add(GlobalQuizManager("quizmanager"));
-	//var quizmanager = NewQuizManagerObject();
-	//quizmanager.Load(gamename, i0,i1,i2,i3);
-	//CurrentManager().Add(quizmanager);
+	var quizmanager = NewQuizManagerObject();
+	quizmanager.Load(gamename, i0,i1,i2,i3);
+	CurrentManager().Add(quizmanager);
 }
 
 def LoadUIplayerselect(Ui ui) {
 	ui.AddCallback("Run", RunQuiz);
 	ui.AddCallback("Switch", Switch);
+	GlobalUi("playerselect") = ui.Ptr();
 	CurrentManager().Add(ui);
 }

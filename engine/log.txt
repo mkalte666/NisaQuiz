@@ -13,3 +13,4 @@ Filling dbs with the info in the files...
 Done!
 Give information to TailTipUI
 Done!
+Error: "'Ptr' is not a function." 

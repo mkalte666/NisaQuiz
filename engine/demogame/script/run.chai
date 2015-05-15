@@ -10,7 +10,8 @@ def Init() {}
 
 def Run() {
 	ResetCurrentTextInput();
-	GlobalUi("playerselect").Load("playerselect");
+	var ui = NewUiObject();
+	ui.Load("playerselect");
 	CurrentManager().RunGame(ScriptUpdate, ScriptRender);
 }
 

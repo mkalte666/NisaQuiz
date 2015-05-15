@@ -1,22 +1,4 @@
-<multiplechoice>
-	What year is it?
-	<answer> Attack on Titan </answer>
-	<answer> 2014 </answer>
-	<rightanswer> 2015 </rightanswer>
-	<answer> 2016 </answer>
-</multiplechoice>
 
 <question points="20" >
 	How many Snipers do you need to screw in a lightbulb?
 </question>
-
-<multiplechoice>
-	What year is it?
-	<answer> 2014 </answer>
-	<rightanswer> 2015 </rightanswer>
-	<answer> 2016 </answer>
-</multiplechoice>
-<question  points="50" >
-	What is the size of your mom? MAX_DOUBLE xD kill me
-</question>
-
