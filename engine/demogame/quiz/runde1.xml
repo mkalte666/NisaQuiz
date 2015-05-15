@@ -1,0 +1,43 @@
+﻿<multiplechoice points="20" >
+	Wie heißt der erste Offizier Whitebeards?
+	<answer>  Ace </answer>
+	<answer> Jozu </answer>
+	<rightanswer> Marco </rightanswer>
+	<answer> Hanz </answer>
+</multiplechoice>
+
+<multiplechoice points="20" >
+	Wie heiß die neue Dragonball Serie?
+	<rightanswer> Dragonball Super </rightanswer>
+	<answer>  Dragonball Mega </answer>
+	<answer> Dragonball Again  </answer>
+	<answer> Dragonball Z 2 </answer>
+</multiplechoice>
+
+<multiplechoice points="20" >
+	Welcher Fullmetal Alchemist Charakter beherrscht das Element Feuer (wenn es trocken ist)?
+	<answer>  Edward Elric </answer>
+	<rightanswer> Roy Mustang </rightanswer>
+	<answer> Basque Grand  </answer>
+	<answer> Hier könnte ihre Werbung stehen </answer>
+</multiplechoice>
+
+<multiplechoice points="20" >
+	 Was machen Japaner zum Jahreswechsel?
+	<answer>  Feuerwerk </answer>
+	<answer> sie schlafen weiter </answer>
+	<rightanswer> Sie besuchen den Tempel </rightanswer>
+	<answer> sie erzählen sich Gruselgeschichten </answer>
+</multiplechoice>
+
+<question audio="K" points="30" >
+	Aus welchem Anime stammt folgendes Lied:
+</question>
+
+<multiplechoice points="30">
+	Wie heißt die Katze von Sailor Venus:
+	<answer> Atrium </answer>
+	<rightanswer> Artemis </rightanswer>
+	<answer> Ariel </answer>
+	<answer> Arterie </answer>
+</multiplechoice>

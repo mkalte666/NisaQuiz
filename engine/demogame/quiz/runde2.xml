@@ -1,0 +1,43 @@
+<multiplechoice points="20" >
+	In was verwandelt sich Shampoo aus Ranma 1/2?
+	<answer>  Äffchen </answer>
+	<answer> Schwein </answer>
+	<answer> Maus </answer>
+	<rightanswer>  Katze </rightanswer>
+</multiplechoice>
+
+<multiplechoice points="20" >
+	Wie heißt Mimis Digimon?
+	<answer>  Bukamon  </answer>
+	<rightanswer> Tanemon </rightanswer>
+	<answer> Tentomon </answer>
+	<answer> Patamon </answer>
+</multiplechoice>
+
+<multiplechoice points="20" >
+	Wie heißt der Hund der Cowboy Bebop-Besatzung?
+	<answer>  Hasso </answer>
+	<answer> Eve </answer>
+	<answer> Paw </answer>
+	<rightanswer> Ein </rightanswer>
+</multiplechoice>
+
+<multiplechoice points="20" >
+	Was feiern die Japaner Ende April/Anfang Mai?
+	<rightanswer> Golden Week </rightanswer>
+	<answer> die blaue Stunde </answer>
+	<answer> den roten Freitag </answer>
+	<answer> den grünen Monat </answer>
+</multiplechoice>
+
+<multiplechoice points="20" >
+	Wie reist Kagome durch die Zeit?
+	<answer> in den Spiegel schauen </answer>
+	<rightanswer> in den Brunnen springen </rightanswer>
+	<answer> im Traum </answer>
+	<answer> durchs Telefon </answer>
+</multiplechoice>
+
+<question audio="SwordArtOnline" points="40" >
+	Aus welchem Anime stammt folgendes Lied:
+</question>

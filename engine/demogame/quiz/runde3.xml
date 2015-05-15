@@ -1,0 +1,43 @@
+<question audio="Durarara" points="30" >
+	Aus welchem Anime stammt folgendes Lied:
+</question>
+
+<multiplechoice points="20" >
+	Von wem hat Monkey D. Ruffy seinen Strohhut?
+	<answer>  Falkenauge </answer>
+	<answer> Nami </answer>
+	<rightanswer>  Shanks </rightanswer>
+	<answer> Zorro </answer>
+</multiplechoice>
+
+<multiplechoice points="20" >
+	Welche Zusatzfunktion hat Conans Armbanduhr?
+	<answer>  Taschenrechner </answer>
+	<rightanswer> Narkosechronometer </rightanswer>
+	<answer> Radio </answer>
+	<answer> Wasserspritzpistole </answer>
+</multiplechoice>
+
+<multiplechoice points="20" >
+	In wen kann sich Yugi mit Hilfe seines Millenniums Puzzleís verwandeln?
+	<rightanswer> Yami Yugi </rightanswer>
+	<answer>  Super Saiyajin </answer>
+	<answer> Seto Kaiba </answer>
+	<answer> Sailor Moon </answer>
+</multiplechoice>
+
+<multiplechoice points="20" >
+	Wie heiﬂt Gon's bester Freund?
+	<answer> Leorio </answer>
+	<answer> Kurapika </answer>
+	<rightanswer> Killuah </rightanswer>
+	<answer> Hisoka </answer>
+</multiplechoice>
+
+<multiplechoice points="30">
+	In wen verwandelt sich Momoko, aus der Serie Weeding Peach?
+	<answer> Lilly, der Engel der Reinheit </answer>
+	<rightanswer> Weeding Peach, der Engel der Liebe </rightanswer>
+	<answer> Daisy, der Engel der Wahrheit </answer>
+	<answer> Salvia, der Engel der Leidenschaft </answer>
+</multiplechoice>

@@ -1,0 +1,87 @@
+<question audio="ShingekinoKyojin" points="30" >
+	Aus welchem Anime stammt folgendes Lied:
+</question>
+
+<multiplechoice points="20" >
+	 Aus wie vielen Teilen besteht Zangetsu?
+	<answer>  1 </answer>
+	<answer> 4 </answer>
+	<rightanswer> 2 </rightanswer>
+	<answer> 6 </answer>
+</multiplechoice>
+
+<multiplechoice points="20" >
+	 Wie heißt der Geist, um den es in AnoHana geht?
+	<answer> Renma </answer>
+	<rightanswer> Menma </rightanswer>
+	<answer> Memna </answer>
+	<answer> Ranma </answer>
+</multiplechoice>
+
+<multiplechoice points="20" >
+	  Wovon handelt die Serie Basquash!?
+	<answer> Baseball in Mechas </answer>
+	<rightanswer> Basketball in Mechas </rightanswer>
+	<answer> Fußball in Mechas </answer>
+	<answer> Football in Mechas </answer>
+</multiplechoice>
+
+<multiplechoice points="20" >
+	  Wer wird im vierten Bleach Movie entführt?
+	<answer> Karin </answer>
+	<answer> Rukia </answer>
+	<answer> Yachiru </answer>
+	<rightanswer> Yuzu </rightanswer>
+</multiplechoice>
+
+<multiplechoice points="30">
+	 Welche der sieben Todsünden ist eine Frau?
+	<answer> Sloth </answer>
+	<answer> Envy </answer>
+	<answer> Greed </answer>
+	<rightanswer> Lust </rightanswer>
+</multiplechoice>
+
+<multiplechoice points="20" >
+	 Wie heißt Ash's zweites Pokemon?
+	<answer> Tauboga </answer>
+	<answer> Shiggy </answer>
+	<rightanswer> Raupy </rightanswer>
+	<answer> Bisasam </answer>
+</multiplechoice>
+
+<multiplechoice points="20" >
+	 Welchen Namen trug Lucy's Geist Leo, bevor er in die Welt der Sternengeister zurück kehrte?
+	<answer> Gray </answer>
+	<answer> Natsu </answer>
+	<rightanswer> Loki </rightanswer>
+	<answer> Luca </answer>
+</multiplechoice>
+
+<question audio="DetroitMetalCity" points="30" >
+	Aus welchem Anime stammt folgendes Lied:
+</question>
+
+<multiplechoice points="20" >
+	  Mit was kann man Hijikata aus Gintama glücklich machen?
+	<answer> Ketchup </answer>
+	<rightanswer> Mayonnaise </rightanswer>
+	<answer> Meerettich </answer>
+	<answer> Ingwer </answer>
+</multiplechoice>
+
+<multiplechoice points="20" >
+	  Wie heißt Vegeta's kleiner Bruder?
+	<answer> Table </answer>
+	<answer> Trable </answer>
+	<answer> Tabler</answer>
+	<rightanswer> Tarble </rightanswer>
+</multiplechoice>
+
+<multiplechoice points="50">
+	 Wer komponierte die Sountracks zu Kill la Kill, Guilty Crown und Attack on Titan?
+	<answer> Joe Hisaishi </answer>
+	<answer> Yuki Kajiura </answer>
+	<answer> Nobuo Uematsu </answer>
+	<rightanswer> Hiroyuki Sawano </rightanswer>
+</multiplechoice>

@@ -1,0 +1,43 @@
+<multiplechoice points="20" >
+	Was macht Tomoyo am liebsten? (Card Captor Sakura)
+	<answer>  lesen </answer>
+	<answer> für die schule lernen </answer>
+	<rightanswer>  Sakura filmen </rightanswer>
+	<answer> Fussball spielen </answer>
+</multiplechoice>
+
+<multiplechoice points="20" >
+	Was suchen Sakura und Shaolan?
+	<answer> gute Reiseziele </answer>
+	<rightanswer> Sakuras Erinnerungen </rightanswer>
+	<answer> neue Freunde </answer>
+	<answer> eine Wohnung </answer>
+</multiplechoice>
+
+<question audio="OnePiece" points="30" >
+	Aus welchem Anime stammt folgendes Lied:
+</question>
+
+<multiplechoice points="20" >
+	 Welche Kraft bekommt Sakura später?
+	<answer> Kraft des Mondes  </answer>
+	<rightanswer> Kraft der Sterne </rightanswer>
+	<answer> Kraft der Liebe </answer>
+	<answer> Kraft der Freundschaft </answer>
+</multiplechoice>
+
+<multiplechoice points="20" >
+	 Welche Farbe hat der Schnuller von Reborn?
+	<answer> Blau </answer>
+	<rightanswer> Orange </rightanswer>
+	<answer> Violett </answer>
+	<answer> Rot </answer>
+</multiplechoice>
+
+<multiplechoice points="30">
+	Wie heisst Japan in der Landessprache?
+	<answer> Doitsu </answer>
+	<answer> Fransu </answer>
+	<answer> Thailando </answer>
+	<rightanswer> Nihon </rightanswer>
+</multiplechoice>
