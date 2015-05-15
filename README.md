@@ -1,16 +1,13 @@
-#Dragon2D 
+#NisaQuiz
 ##about
 
-[![Join the chat at https://gitter.im/DregginGames/Dragon2D](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/DregginGames/Dragon2D?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
-Dragon2D is an RPG engine. Its still in hard development, so dont expect much yet.
+NisaQuiz is a Quiz Application for the NiSaCon in Germany. 
+Its based on the 2DRPG engine Dragon2D (https://github.com/DregginGames/Dragon2D). 
 
-##compile
-To compile for Development, debugging, ... run `make` wich will create the binarys.
-But it wont compile out of nothing. You will need SDL2, SDL2_ttf, SDL2_image, SDL2_mixer and libglew. 
-Also you might want to edit TailTipUI - clone it from my account (mkalte666) and when you're done copy the include- and bin-folder to the TailTipUI-folder in the sources.
+You may use it for free - only problem might be that you need our fancy buzzers. And the buzzers hardware is ugh.. not closed source but try to find cad and code on the laptop of the student that wrote/build it xD
 
-You can also do a release build with `make release`, cleanup with `make clean` and pack a release with `make pack`
+Use code as reference or say something if you have questions/need help!
 
-Thats it for now.
+Greetings
 
-
+Malte
