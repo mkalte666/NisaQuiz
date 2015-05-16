@@ -11,7 +11,7 @@
 		<text id="p3p" color="1,1,1,1" font="OpenSans:64" pos="0.6,0.41,0.25,0.04" name=""/>
 	</area>
 	<area pos="0,0,1,1" id="questionbase" hidden="true" >
-		<area centered="true" id="i0" color="0,0,1,0.1" bgcolor="0,0,1,0.1" pos="0.5,0.6,0.8,0.04" />
+		<area centered="true" id="i0" color="0,0,1,0.1" bgcolor="0,0,1,0.1" pos="0.5,0.6,0.95,0.04" />
 		<text centered="true" id="questionText" color="1,1,1,1" font="OpenSans:64" pos="0.5,0.6,0.8,0.04" name="Question Here!" />
 		<area centered="true" id="choiceContainer" bgcolor="0,0,0,0.4" pos="0.5,0.66,0.92,0.32">
 			<text centered="true" id="answer0" color="1,1,1,1" font="OpenSans:64" pos="0.5,0.025,1,0.125" name=""/>

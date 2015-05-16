@@ -1,7 +1,7 @@
-<multiplechoice points="20" >
+ï»¿<multiplechoice points="20" >
 	Was macht Tomoyo am liebsten? (Card Captor Sakura)
 	<answer>  lesen </answer>
-	<answer> für die schule lernen </answer>
+	<answer> fÃ¼r die schule lernen </answer>
 	<rightanswer>  Sakura filmen </rightanswer>
 	<answer> Fussball spielen </answer>
 </multiplechoice>
@@ -19,7 +19,7 @@
 </question>
 
 <multiplechoice points="20" >
-	 Welche Kraft bekommt Sakura später?
+	 Welche Kraft bekommt Sakura spÃ¤ter?
 	<answer> Kraft des Mondes  </answer>
 	<rightanswer> Kraft der Sterne </rightanswer>
 	<answer> Kraft der Liebe </answer>
