@@ -15,11 +15,11 @@
 </multiplechoice>
 
 <multiplechoice points="20" >
-	Welcher Fullmetal Alchemist Charakter beherrscht das Element Feuer (wenn es trocken ist)?
-	<answer>  Edward Elric </answer>
-	<rightanswer> Roy Mustang </rightanswer>
-	<answer> Basque Grand  </answer>
-	<answer> Hier könnte ihre Werbung stehen </answer>
+	 Die wohl bekannteste Figur der Vocaloids?
+	<answer> Kaito </answer>
+	<rightanswer> Hatsune Miku </rightanswer>
+	<answer> Kagamine Rin </answer>
+	<answer> Kagamine Len </answer>
 </multiplechoice>
 
 <multiplechoice points="20" >

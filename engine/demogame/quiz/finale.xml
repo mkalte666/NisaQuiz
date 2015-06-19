@@ -51,11 +51,11 @@
 </multiplechoice>
 
 <multiplechoice points="20" >
-	 Welchen Namen trug Lucy's Geist Leo, bevor er in die Welt der Sternengeister zurück kehrte?
-	<answer> Gray </answer>
-	<answer> Natsu </answer>
-	<rightanswer> Loki </rightanswer>
-	<answer> Luca </answer>
+	  Die wievielte Staffel ist Digimon Xros Wars?
+	<answer> 2 </answer>
+	<answer> 3 </answer>
+	<rightanswer> 6 </rightanswer>
+	<answer> 5 </answer>
 </multiplechoice>
 
 <question audio="DetroitMetalCity" points="30" >
@@ -79,9 +79,9 @@
 </multiplechoice>
 
 <multiplechoice points="50">
-	 Wer komponierte die Sountracks zu Kill la Kill, Guilty Crown und Attack on Titan?
-	<answer> Joe Hisaishi </answer>
-	<answer> Yuki Kajiura </answer>
-	<answer> Nobuo Uematsu </answer>
-	<rightanswer> Hiroyuki Sawano </rightanswer>
+	  Um welche Schule geht es primär in Prince of Tennis?
+	<answer> Rikkai Dai </answer>
+	<answer> Higa </answer>
+	<answer> Hyoutei </answer>
+	<rightanswer> Seigaku </rightanswer>
 </multiplechoice>

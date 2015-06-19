@@ -101,7 +101,7 @@ namespace Dragon2D
 		case Dragon2D::QuizManager::STATE_QUESTION_CLEANUP:
 			buzzerManager->FullReset();
 			if (questions.front().audioName != "") {
-				Music(questions.front().audioName).Stop(100);
+				Music(questions.front().audioName).Stop(0);
 			}
 			curstate = STATE_POINT_DISPLAY;
 			if (!questions.empty()) {
@@ -176,6 +176,9 @@ namespace Dragon2D
 			triesLeft --;
 
 			if (triesLeft > 0) {
+				if(questions.front().audioName!="")  {
+					Music(questions.front().audioName).Play(100,-1);
+				}
 				curstate = STATE_QUESTION;
 				SwitchUI();
 				buzzerManager->Reset();
@@ -284,11 +287,14 @@ namespace Dragon2D
 		auto questionbase = curui->GetLoader().GetElementById("questionbase");
 		auto checkquestionbase = curui->GetLoader().GetElementById("checkquestionbase");
 		auto winnerscreen = curui->GetLoader().GetElementById("winnerscreen");
+		//this is basically checks if stuff is valid. it should be done with the sub-elements too, but hey...
 		if (pointscreen&&questionbase&&checkquestionbase&&winnerscreen) {
 			pointscreen->SetHidden(false);
 			questionbase->SetHidden(true);
 			checkquestionbase->SetHidden(true);
 			winnerscreen->SetHidden(true);
+			//nearly always we need the pointscreen, so display it anytime. 
+			//show winner will disable the pointscreen
 			pointscreen->GetElementById("round")->SetName(std::string("Round: "+name));
 			pointscreen->GetElementById("p0n")->SetName(names[0]);
 			pointscreen->GetElementById("p1n")->SetName(names[1]);
@@ -306,9 +312,11 @@ namespace Dragon2D
 				
 				break;
 			case STATE_QUESTION_CHECKANSWER:
+				//output the name of the team  hitting the buzzer
 				checkquestionbase->GetElementById("buzzerPlayer")->SetName(names[lastBuzzerinputParam - 1]);
 				checkquestionbase->SetHidden(false);
 			case STATE_QUESTION:
+				//Print out the question and for multiplechoice the possible answers
 				questionbase->GetElementById("questionText")->SetName(questions.front().text);
 				if (questions.front().type == QuizQuestion::QUESTION_MULTIPLE_CHOICE) {
 					questionbase->GetElementById("choiceContainer")->SetHidden(false);
@@ -339,6 +347,7 @@ namespace Dragon2D
 				break;
 			case STATE_SHOW_WINNER:
 			{
+				//sort the order foo. we should use the std functions but this was way faster
 				std::vector<std::pair<int, std::string>> order;
 				for (int i = 0; i < numPlayers; i++) {
 					if (order.size() == 0) {
@@ -358,6 +367,7 @@ namespace Dragon2D
 						}
 					}
 				}
+				//print out the winners in order
 				winnerscreen->GetElementById("winnername")->SetName(order.front().second+std::string(" (")+ std::to_string(order.front().first)+")");
 				for (int i = 1; i < numPlayers; i++) {
 					winnerscreen->GetElementById(std::string("place")+std::to_string(i+1))->SetName(std::to_string(i+1)+std::string(". ")+order[i].second + std::string(" (") + std::to_string(order[i].first) + ")");
