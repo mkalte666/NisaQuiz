@@ -1,9 +1,10 @@
 #title and stuff
 title = NisaQuiz
 title2 = Used for development
-comport = COM17
+comport = /dev/ttyUSB0
 
 #some config settings not fixed to the engine
 debug = true
 
 maxtries = 2
+allowNames = false

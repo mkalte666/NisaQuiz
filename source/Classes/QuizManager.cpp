@@ -98,7 +98,12 @@ namespace Dragon2D
 		if (player3 != "") (numPlayers = 3);
 		if (player4 != "") (numPlayers = 4);
 		if (numPlayers == 0) {
-			return;
+			numPlayers = 4;
+			player1 = "S1";
+			player2 = "S2";
+			player3 = "S3";
+			player4 = "S4";
+
 		}
 		names.resize(4);
 		points.resize(4, 0);
@@ -343,7 +348,7 @@ namespace Dragon2D
 			{
 			case STATE_POINT_DISPLAY:
 				//only here we show the fullscreen-pointscreen
-				pointscreen->GetElementById("round")->SetName(std::string("Round: " + name));
+				pointscreen->GetElementById("round")->SetName(std::string("Runde: " + name));
 				pointscreen->GetElementById("p0n")->SetName(names[0]);
 				pointscreen->GetElementById("p1n")->SetName(names[1]);
 				pointscreen->GetElementById("p2n")->SetName(names[2]);
