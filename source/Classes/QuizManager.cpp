@@ -55,17 +55,37 @@ namespace Dragon2D
 					}
 				}
 			}
+			else if (t.GetName() == "image") {
+				newQuestion.type = QuizQuestion::QUESTION_IMAGEBASE;
+				newQuestion.text = t.GetData();
+				auto answers = t.GetChildren();
+				newQuestion.imageQuestion = t.GetAttribute("questionImage");
+				newQuestion.imageSolution = t.GetAttribute("solutionImage");
+				Env::GetResourceManager().RequestTextureResource(newQuestion.imageQuestion);
+				Env::GetResourceManager().RequestTextureResource(newQuestion.imageSolution);
+
+				if (answers.size() == 1 && answers[0].GetName()=="answer") {
+					newQuestion.answers.push_back(answers[0].GetData());
+					newQuestion.rightAnswer = 0;
+				}
+				else {
+					continue;
+				}
+			}
 			else {
 				continue;
 			}
 			newQuestion.points = atoi(t.GetAttribute("points").c_str());
 			newQuestion.audioName = t.GetAttribute("audio");
+			newQuestion.imageName = t.GetAttribute("imagename");
 			if (newQuestion.audioName != "") {
 				Env::GetResourceManager().RequestAudioResource(newQuestion.audioName);
 			}
+			if (newQuestion.imageName != "") {
+				Env::GetResourceManager().RequestTextureResource(newQuestion.imageName);
+			}
 			questions.push(newQuestion);
 		}
-		//todo: randomize order
 
 
 		//Ask for the music
@@ -144,6 +164,10 @@ namespace Dragon2D
 			}
 			break;
 		case Dragon2D::QuizManager::STATE_QUESTION_CHECKANSWER:			
+			if (lastInput == IN_OK || lastInput == IN_RESET || lastInput == IN_WRONG) {
+				Save(undoSave);
+			}
+
 			if (lastInput == IN_RESET) {
 				curstate = STATE_QUESTION_CLEANUP;
 			}
@@ -196,7 +220,7 @@ namespace Dragon2D
 			break;
 		case Dragon2D::QuizManager::STATE_RIGHT:
 			points[lastBuzzerinputParam-1] += questions.front().points;
-			if (questions.front().type == QuizQuestion::QUESTION_MULTIPLE_CHOICE) {
+			if (questions.front().type != QuizQuestion::QUESTION_TEXT) {
 				curstate = STATE_SHOW_ANSWER;
 				SwitchUI();
 			}
@@ -255,6 +279,15 @@ namespace Dragon2D
 		InputEventFunction wrongevent = [this](bool pressed) { if (pressed) this->lastInput = QuizManageInput::IN_WRONG; };
 		InputEventFunction resetevent = [this](bool pressed) { if (pressed) this->lastInput = QuizManageInput::IN_RESET; };
 		InputEventFunction startevent = [this](bool pressed) { if (pressed) this->lastInput = QuizManageInput::IN_START; };
+		InputEventFunction undoevent = [this](bool pressed) { 
+			if (pressed&&this->undoSave) {
+				auto ptr = std::dynamic_pointer_cast<QuizManager>(this->Ptr());
+				this->undoSave->Save(ptr);
+				this->SwitchUI();
+			}
+			std::cout << "BLAAA" << std::endl;
+		};
+
 		buzzerEventHandler.SetHandlerFunction([this](int type, int param) {
 			this->lastBuzzerinput = type;
 			this->lastBuzzerinputParam = param;
@@ -267,6 +300,7 @@ namespace Dragon2D
 		Env::GetInput().AddHook("2", Ptr(), event2);
 		Env::GetInput().AddHook("3", Ptr(), event3);
 		Env::GetInput().AddHook("4", Ptr(), event4);
+		Env::GetInput().AddHook("undo", Ptr(), undoevent);
 		buzzerManager->AddEventHandler(buzzerEventHandler);
 	}
 
@@ -284,32 +318,42 @@ namespace Dragon2D
 		}
 		//hide all and load the right one for curstate IF all do exist
 		auto pointscreen = curui->GetLoader().GetElementById("pointscreen");
+		auto pointscreen_inline = curui->GetLoader().GetElementById("pointscreen_inline");
 		auto questionbase = curui->GetLoader().GetElementById("questionbase");
+		auto imagequestionbase = curui->GetLoader().GetElementById("imagequestionbase");
 		auto checkquestionbase = curui->GetLoader().GetElementById("checkquestionbase");
 		auto winnerscreen = curui->GetLoader().GetElementById("winnerscreen");
 		//this is basically checks if stuff is valid. it should be done with the sub-elements too, but hey...
 		if (pointscreen&&questionbase&&checkquestionbase&&winnerscreen) {
-			pointscreen->SetHidden(false);
+			pointscreen->SetHidden(true);
+			pointscreen_inline->SetHidden(false);
 			questionbase->SetHidden(true);
 			checkquestionbase->SetHidden(true);
+			imagequestionbase->SetHidden(true);
 			winnerscreen->SetHidden(true);
-			//nearly always we need the pointscreen, so display it anytime. 
+			//nearly always we need the pointscreen_inline, so display it anytime. 
 			//show winner will disable the pointscreen
-			pointscreen->GetElementById("round")->SetName(std::string("Round: "+name));
-			pointscreen->GetElementById("p0n")->SetName(names[0]);
-			pointscreen->GetElementById("p1n")->SetName(names[1]);
-			pointscreen->GetElementById("p2n")->SetName(names[2]);
-			pointscreen->GetElementById("p3n")->SetName(names[3]);
-			pointscreen->GetElementById("p0p")->SetName(std::to_string(points[0]));
-			numPlayers >= 2 ? pointscreen->GetElementById("p1p")->SetName(std::to_string(points[1])) : pointscreen->GetElementById("p1p")->SetName("");
-			numPlayers >= 3 ? pointscreen->GetElementById("p2p")->SetName(std::to_string(points[2])) : pointscreen->GetElementById("p2p")->SetName("");
-			numPlayers >= 4 ? pointscreen->GetElementById("p3p")->SetName(std::to_string(points[3])) : pointscreen->GetElementById("p3p")->SetName("");
+			pointscreen_inline->GetElementById("p0p")->SetName(std::to_string(points[0]));
+			numPlayers >= 2 ? pointscreen_inline->GetElementById("p1p")->SetName(std::to_string(points[1])) : pointscreen->GetElementById("p1p")->SetName("");
+			numPlayers >= 3 ? pointscreen_inline->GetElementById("p2p")->SetName(std::to_string(points[2])) : pointscreen->GetElementById("p2p")->SetName("");
+			numPlayers >= 4 ? pointscreen_inline->GetElementById("p3p")->SetName(std::to_string(points[3])) : pointscreen->GetElementById("p3p")->SetName("");
 
 
 			switch (curstate)
 			{
 			case STATE_POINT_DISPLAY:
-				
+				//only here we show the fullscreen-pointscreen
+				pointscreen->GetElementById("round")->SetName(std::string("Round: " + name));
+				pointscreen->GetElementById("p0n")->SetName(names[0]);
+				pointscreen->GetElementById("p1n")->SetName(names[1]);
+				pointscreen->GetElementById("p2n")->SetName(names[2]);
+				pointscreen->GetElementById("p3n")->SetName(names[3]);
+				pointscreen->GetElementById("p0p")->SetName(std::to_string(points[0]));
+				numPlayers >= 2 ? pointscreen->GetElementById("p1p")->SetName(std::to_string(points[1])) : pointscreen->GetElementById("p1p")->SetName("");
+				numPlayers >= 3 ? pointscreen->GetElementById("p2p")->SetName(std::to_string(points[2])) : pointscreen->GetElementById("p2p")->SetName("");
+				numPlayers >= 4 ? pointscreen->GetElementById("p3p")->SetName(std::to_string(points[3])) : pointscreen->GetElementById("p3p")->SetName("");
+				pointscreen->SetHidden(false);
+				pointscreen_inline->SetHidden(true);
 				break;
 			case STATE_QUESTION_CHECKANSWER:
 				//output the name of the team  hitting the buzzer
@@ -328,7 +372,16 @@ namespace Dragon2D
 				else {
 					questionbase->GetElementById("choiceContainer")->SetHidden(true);
 				}
-				questionbase->SetHidden(false);
+				if (questions.front().type == QuizQuestion::QUESTION_IMAGEBASE || questions.front().type == QuizQuestion::QUESTION_HIDDENIMAGE) {				
+					auto i = imagequestionbase->GetElementById("qimage");
+					dynamic_cast<TailTipUI::Image*>(i)->SetImage(Env::GetResourceManager().GetTextureResource(questions.front().imageQuestion).GetTextureId(), false);
+					imagequestionbase->GetElementById("questionText")->SetName(questions.front().text);
+					imagequestionbase->GetElementById("questionAnswer")->SetHidden(true);
+					imagequestionbase->SetHidden(false);
+				}
+				else {
+					questionbase->SetHidden(false);
+				}
 				break;
 		
 			case STATE_SHOW_ANSWER:
@@ -343,7 +396,18 @@ namespace Dragon2D
 				else {
 					questionbase->GetElementById("choiceContainer")->SetHidden(true);
 				}
-				questionbase->SetHidden(false);
+
+				if (questions.front().type == QuizQuestion::QUESTION_IMAGEBASE || questions.front().type == QuizQuestion::QUESTION_HIDDENIMAGE) {
+					auto i = imagequestionbase->GetElementById("qimage");
+					dynamic_cast<TailTipUI::Image*>(i)->SetImage(Env::GetResourceManager().GetTextureResource(questions.front().imageSolution).GetTextureId(), false);
+					imagequestionbase->GetElementById("questionText")->SetName(questions.front().text);
+					imagequestionbase->GetElementById("questionAnswer")->SetName(questions.front().answers[0]);
+					imagequestionbase->GetElementById("questionAnswer")->SetHidden(false);
+					imagequestionbase->SetHidden(false);
+				}
+				else {
+					questionbase->SetHidden(false);
+				}
 				break;
 			case STATE_SHOW_WINNER:
 			{
@@ -373,7 +437,7 @@ namespace Dragon2D
 					winnerscreen->GetElementById(std::string("place")+std::to_string(i+1))->SetName(std::to_string(i+1)+std::string(". ")+order[i].second + std::string(" (") + std::to_string(order[i].first) + ")");
 				}
 				winnerscreen->SetHidden(false);
-				pointscreen->SetHidden(true);
+				pointscreen_inline->SetHidden(true);
 
 				break;
 			}
@@ -381,5 +445,28 @@ namespace Dragon2D
 				break;
 			}
 		}
+	}
+
+	void QuizManager::Save(QuizManagerPtr &dst)
+	{
+		if (!dst) {
+			dst.reset(new QuizManager);
+		}
+
+		dst->name = name;
+		dst->points = points;
+		dst->numPlayers = numPlayers;
+		dst->names = names;
+		dst->curstate = curstate;
+		dst->lastBuzzerinput = lastBuzzerinput;
+		dst->lastBuzzerinputParam = lastBuzzerinputParam;
+		dst->lastInput = QuizManageInput::IN_NONE;
+		dst->curui = curui;
+		dst->buzzerEventHandler = buzzerEventHandler;
+		dst->triggerdButton = triggerdButton;
+		dst->questions = questions;
+		dst->currentQuestion = currentQuestion;
+		dst->maxtries = maxtries;
+		dst->triesLeft = triesLeft;
 	}
 };//namespace Dragon2D

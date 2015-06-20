@@ -1,4 +1,31 @@
-
+﻿
 <question points="20" >
 	How many Snipers do you need to screw in a lightbulb?
 </question>
+
+<image points="40" solutionImage = "Buzzerspiel_Ende" questionImage="Buzzerspiel_Anfang">
+	Wer ist das?
+	<answer>
+		Meter Paffai
+	</answer>
+</image>
+
+<question audio="ShingekinoKyojin" points="30" >
+	Aus welchem Anime stammt folgendes Lied:
+</question>
+
+<multiplechoice points="20" >
+	 Aus wie vielen Teilen besteht Zangetsu?
+	<answer>  1 </answer>
+	<answer> 4 </answer>
+	<rightanswer> 2 </rightanswer>
+	<answer> 6 </answer>
+</multiplechoice>
+
+<multiplechoice points="20" >
+	 Wie heißt der Geist, um den es in AnoHana geht?
+	<answer> Renma </answer>
+	<rightanswer> Menma </rightanswer>
+	<answer> Memna </answer>
+	<answer> Ranma </answer>
+</multiplechoice>

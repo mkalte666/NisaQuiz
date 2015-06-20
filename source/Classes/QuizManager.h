@@ -15,17 +15,38 @@ namespace Dragon2D
 		enum QuestionType {
 			QUESTION_TEXT,
 			QUESTION_MULTIPLE_CHOICE,
+			QUESTION_IMAGEBASE,
+			QUESTION_HIDDENIMAGE,
 		};
 		int type;
 		std::string text;
 		int points;
 
+		std::string imageName;
 		std::string audioName;
 		
+		//for image-questions
+		std::string imageQuestion;
+		std::string imageSolution;
+
 		std::vector<std::string> answers;
 		int rightAnswer;
 	};
 
+	class QuestionHideimageHelper
+	{
+	public:
+		QuestionHideimageHelper(std::string texture, glm::vec4 pos);
+
+		void Update();
+		void Render();
+
+	private:
+		bool w;
+		bool h;
+		int per_frame;
+		std::map<int, std::map<int, bool>> showTiles;
+	};
 
 	//class: QuizManager
 	//note: manages a running quiz
@@ -97,8 +118,10 @@ namespace Dragon2D
 		int maxtries;
 		int triesLeft;
 
+		QuizManagerPtr undoSave;
 	protected:
 		void SwitchUI();
+		void Save(QuizManagerPtr &dst);
 	};
 
 	D2DCLASS_SCRIPTINFO_BEGIN(QuizManager, BaseClass)

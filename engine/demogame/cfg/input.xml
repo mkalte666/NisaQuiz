@@ -12,3 +12,4 @@
 <input name="wrong" key="KEY_BACKSPACE" />
 <input name="reset" key="KEY_DEL" />
 <input name="start" key="KEY_SPACE" />
+<input name="undo" key="u" />

@@ -1,34 +1,50 @@
 <root>
+	<image pos="0,0,1,1" texturename="buzzerbg" />
 	<area id="pointscreen" pos="0,0,1,1">
-		<text id="round" color="1,1,1,1" font="OpenSans:64" pos="0.04,0.05,0.25,0.04" name=""/>
-		<text id="p0n" color="1,1,1,1" font="OpenSans:64" pos="0.2,0.2,0.25,0.04" name=""/>
-		<text id="p0p" color="1,1,1,1" font="OpenSans:64" pos="0.6,0.2,0.25,0.04" name=""/>
-		<text id="p1n" color="1,1,1,1" font="OpenSans:64" pos="0.2,0.27,0.25,0.04" name=""/>
-		<text id="p1p" color="1,1,1,1" font="OpenSans:64" pos="0.6,0.27,0.25,0.04" name=""/>
-		<text id="p2n" color="1,1,1,1" font="OpenSans:64" pos="0.2,0.34,0.25,0.04" name=""/>
-		<text id="p2p" color="1,1,1,1" font="OpenSans:64" pos="0.6,0.34,0.25,0.04" name=""/>
-		<text id="p3n" color="1,1,1,1" font="OpenSans:64" pos="0.2,0.41,0.25,0.04" name=""/>
-		<text id="p3p" color="1,1,1,1" font="OpenSans:64" pos="0.6,0.41,0.25,0.04" name=""/>
+		<text id="round" color="0,0,0,1" font="OpenSans:64" pos="0.04,0.05,0.25,0.04" name=""/>
+		<text id="p0n" color="0,0,0,1" font="OpenSans:64" pos="0.2,0.2,0.25,0.04" name=""/>
+		<text id="p0p" color="0,0,0,1" font="OpenSans:64" pos="0.6,0.2,0.25,0.04" name=""/>
+		<text id="p1n" color="0,0,0,1" font="OpenSans:64" pos="0.2,0.27,0.25,0.04" name=""/>
+		<text id="p1p" color="0,0,0,1" font="OpenSans:64" pos="0.6,0.27,0.25,0.04" name=""/>
+		<text id="p2n" color="0,0,0,1" font="OpenSans:64" pos="0.2,0.34,0.25,0.04" name=""/>
+		<text id="p2p" color="0,0,0,1" font="OpenSans:64" pos="0.6,0.34,0.25,0.04" name=""/>
+		<text id="p3n" color="0,0,0,1" font="OpenSans:64" pos="0.2,0.41,0.25,0.04" name=""/>
+		<text id="p3p" color="0,0,0,1" font="OpenSans:64" pos="0.6,0.41,0.25,0.04" name=""/>
+	</area>
+	<area id="pointscreen_inline" pos="0,0,1,1" hidden="true">
+		<text id="round" color="0,0,0,1" font="OpenSans:64" pos="0.04,0.05,0.25,0.04" name=""/>
+		<text 	 color="0,0,0,1" font="OpenSans:64" pos="0.1,0.9,0.25,0.04" name="S1:"/>
+		<text id="p0p" color="0,0,0,1" font="OpenSans:64" pos="0.15,0.9,0.25,0.04" name=""/>
+		<text  color="0,0,0,1" font="OpenSans:64" pos="0.3,0.9,0.25,0.04" name="S2:"/>
+		<text id="p1p" color="0,0,0,1" font="OpenSans:64" pos="0.35,0.9,0.25,0.04" name=""/>
+		<text  color="0,0,0,1" font="OpenSans:64" pos="0.5,0.9,0.25,0.04" name="S3:"/>
+		<text id="p2p" color="0,0,0,1" font="OpenSans:64" pos="0.55,0.9,0.25,0.04" name=""/>
+		<text  color="0,0,0,1" font="OpenSans:64" pos="0.7,0.9,0.25,0.04" name="S4:"/>
+		<text id="p3p" color="0,0,0,1" font="OpenSans:64" pos="0.75,0.9,0.25,0.04" name=""/>
 	</area>
 	<area pos="0,0,1,1" id="questionbase" hidden="true" >
-		<area centered="true" id="i0" color="0,0,1,0.1" bgcolor="0,0,1,0.1" pos="0.5,0.6,0.95,0.04" />
-		<text centered="true" id="questionText" color="1,1,1,1" font="OpenSans:64" pos="0.5,0.6,0.8,0.04" name="Question Here!" />
-		<area centered="true" id="choiceContainer" bgcolor="0,0,0,0.4" pos="0.5,0.66,0.92,0.32">
-			<text centered="true" id="answer0" color="1,1,1,1" font="OpenSans:64" pos="0.5,0.025,1,0.125" name=""/>
-			<text centered="true" id="answer1" color="1,1,1,1" font="OpenSans:64" pos="0.5,0.275,1,0.125" name=""/>
-			<text centered="true" id="answer2" color="1,1,1,1" font="OpenSans:64" pos="0.5,0.525,1,0.125" name=""/>
-			<text centered="true" id="answer3" color="1,1,1,1" font="OpenSans:64" pos="0.5,0.775,1,0.125" name=""/>
+		<text centered="true" id="questionText" color="0,0,0,1" font="OpenSans:64" pos="0.5,0.2,0.8,0.04" name="Question Here!" />
+		<area centered="true" id="choiceContainer" pos="0.5,0.4,0.92,0.32">
+			<text centered="true" id="answer0" color="0,0,0,1" font="OpenSans:64" pos="0.5,0.025,1,0.125" name=""/>
+			<text centered="true" id="answer1" color="0,0,0,1" font="OpenSans:64" pos="0.5,0.275,1,0.125" name=""/>
+			<text centered="true" id="answer2" color="0,0,0,1" font="OpenSans:64" pos="0.5,0.525,1,0.125" name=""/>
+			<text centered="true" id="answer3" color="0,0,0,1" font="OpenSans:64" pos="0.5,0.775,1,0.125" name=""/>
 		</area>
 	</area>	
 	<area pos="0,0,1,1" id="checkquestionbase" hidden="true" >
-		<text centered="true" id="questionText" color="1,1,1,1" font="OpenSans:64" pos="0.05,0.5,0.25,0.04" name=""/>
+		<text centered="true" id="questionText" color="0,0,0,1" font="OpenSans:64" pos="0.05,0.5,0.25,0.04" name=""/>
 		<text centered="true" id="buzzerPlayer" color=".2,1,.2,1" font="OpenSans:64" pos="0.5,0.5,0.25,0.1" name="" />
 	</area>
 	<area pos="0,0,1,1" id="winnerscreen" hidden="true" >
-		<text centered="true" id="thewinneris" color="1,1,1,1" font="OpenSans:64" pos="0.5,0.2,0.25,0.06" name="THE WINNER IS"/>
-		<text centered="true" id="winnername" color="1,1,1,1" font="OpenSans:64" pos="0.5,0.3,0.25,0.05" name=""/>
-		<text centered="true" id="place2" color="1,1,1,1" font="OpenSans:64" pos="0.5,0.5,0.25,0.04" name=""/>
-		<text centered="true" id="place3" color="1,1,1,1" font="OpenSans:64" pos="0.5,0.55,0.25,0.04" name=""/>
-		<text centered="true" id="place4" color="1,1,1,1" font="OpenSans:64" pos="0.5,0.6,0.25,0.04" name=""/>
+		<text centered="true" id="thewinneris" color="0,0,0,1" font="OpenSans:64" pos="0.5,0.2,0.25,0.06" name="THE WINNER IS"/>
+		<text centered="true" id="winnername" color="0,0,0,1" font="OpenSans:64" pos="0.5,0.3,0.25,0.05" name=""/>
+		<text centered="true" id="place2" color="0,0,0,1" font="OpenSans:64" pos="0.5,0.5,0.25,0.04" name=""/>
+		<text centered="true" id="place3" color="0,0,0,1" font="OpenSans:64" pos="0.5,0.55,0.25,0.04" name=""/>
+		<text centered="true" id="place4" color="0,0,0,1" font="OpenSans:64" pos="0.5,0.6,0.25,0.04" name=""/>
 	</area>
+	<area pos="0,0,1,1" id="imagequestionbase" hidden="true" >
+		<text centered="true" id="questionText" color="0,0,0,1" font="OpenSans:64" pos="0.25,0.23,0.5,0.04" name="Question Here!" />
+		<image id="qimage" pos="0.5,0,0.5,0.5" />
+		<text centered="true" id="questionAnswer" color="0,0,0,1" font="OpenSans:64" pos="0.25,0.30,0.5,0.04" name="Answer here" />
+	</area>	
 </root>
